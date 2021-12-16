@@ -12,16 +12,14 @@ import java.util.List;
 public class UserDaoHibernate implements UserDao{
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Override
-    @Transactional
     public void saveUser(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    @Transactional
     public void removeUserById(int id) {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
@@ -38,13 +36,8 @@ public class UserDaoHibernate implements UserDao{
     }
 
     @Override
-    @Transactional
-    public void updateUser(User user) {
-        User user1 = entityManager.find(User.class, user.getId());
-        user1.setName(user.getName());
-        user1.setSurname(user.getSurname());
-        user1.setAge(user.getAge());
-        user1.setGender(user.getGender());
+    public void updateUser(User updatedUser){
+        entityManager.merge(updatedUser);
     }
 
 }

@@ -11,7 +11,7 @@ import ru.olga.springmvc.model.User;
 public class UserController {
 
     @Autowired
-    UserServiceImpl userService;
+    private UserServiceImpl userService;
 
 
     @GetMapping(value = "/")
